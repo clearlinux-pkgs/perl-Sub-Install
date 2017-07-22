@@ -4,7 +4,7 @@
 #
 Name     : perl-Sub-Install
 Version  : 0.928
-Release  : 10
+Release  : 11
 URL      : http://search.cpan.org/CPAN/authors/id/R/RJ/RJBS/Sub-Install-0.928.tar.gz
 Source0  : http://search.cpan.org/CPAN/authors/id/R/RJ/RJBS/Sub-Install-0.928.tar.gz
 Summary  : 'install subroutines into packages easily'
@@ -29,6 +29,10 @@ doc components for the perl-Sub-Install package.
 %setup -q -n Sub-Install-0.928
 
 %build
+export http_proxy=http://127.0.0.1:9/
+export https_proxy=http://127.0.0.1:9/
+export no_proxy=localhost,127.0.0.1,0.0.0.0
+export LANG=C
 if test -f Makefile.PL; then
 %{__perl} Makefile.PL
 make V=1  %{?_smp_mflags}
@@ -38,9 +42,10 @@ else
 fi
 
 %check
+export LANG=C
 export http_proxy=http://127.0.0.1:9/
 export https_proxy=http://127.0.0.1:9/
-export no_proxy=localhost
+export no_proxy=localhost,127.0.0.1,0.0.0.0
 make TEST_VERBOSE=1 test
 
 %install
@@ -57,7 +62,7 @@ find %{buildroot} -type f -name '*.bs' -empty -exec rm -f {} ';'
 
 %files
 %defattr(-,root,root,-)
-/usr/lib/perl5/site_perl/5.24.0/Sub/Install.pm
+/usr/lib/perl5/site_perl/5.26.0/Sub/Install.pm
 
 %files doc
 %defattr(-,root,root,-)
