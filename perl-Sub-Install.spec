@@ -4,7 +4,7 @@
 #
 Name     : perl-Sub-Install
 Version  : 0.928
-Release  : 11
+Release  : 12
 URL      : http://search.cpan.org/CPAN/authors/id/R/RJ/RJBS/Sub-Install-0.928.tar.gz
 Source0  : http://search.cpan.org/CPAN/authors/id/R/RJ/RJBS/Sub-Install-0.928.tar.gz
 Summary  : 'install subroutines into packages easily'
@@ -62,7 +62,7 @@ find %{buildroot} -type f -name '*.bs' -empty -exec rm -f {} ';'
 
 %files
 %defattr(-,root,root,-)
-/usr/lib/perl5/site_perl/5.26.0/Sub/Install.pm
+/usr/lib/perl5/site_perl/5.26.1/Sub/Install.pm
 
 %files doc
 %defattr(-,root,root,-)
