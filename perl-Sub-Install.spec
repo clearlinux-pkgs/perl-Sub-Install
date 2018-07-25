@@ -4,7 +4,7 @@
 #
 Name     : perl-Sub-Install
 Version  : 0.928
-Release  : 14
+Release  : 15
 URL      : https://cpan.metacpan.org/authors/id/R/RJ/RJBS/Sub-Install-0.928.tar.gz
 Source0  : https://cpan.metacpan.org/authors/id/R/RJ/RJBS/Sub-Install-0.928.tar.gz
 Source1  : http://http.debian.net/debian/pool/main/libi/libio-handle-util-perl/libio-handle-util-perl_0.01-2.debian.tar.xz
@@ -13,6 +13,7 @@ Group    : Development/Tools
 License  : Artistic-1.0 Artistic-1.0-Perl GPL-1.0
 Requires: perl-Sub-Install-license
 Requires: perl-Sub-Install-man
+BuildRequires : buildreq-cpan
 
 %description
 This archive contains the distribution Sub-Install,
