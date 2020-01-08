@@ -4,7 +4,7 @@
 #
 Name     : perl-Sub-Install
 Version  : 0.928
-Release  : 24
+Release  : 25
 URL      : https://cpan.metacpan.org/authors/id/R/RJ/RJBS/Sub-Install-0.928.tar.gz
 Source0  : https://cpan.metacpan.org/authors/id/R/RJ/RJBS/Sub-Install-0.928.tar.gz
 Source1  : http://http.debian.net/debian/pool/main/libi/libio-handle-util-perl/libio-handle-util-perl_0.01-2.debian.tar.xz
@@ -12,6 +12,7 @@ Summary  : 'install subroutines into packages easily'
 Group    : Development/Tools
 License  : Artistic-1.0 Artistic-1.0-Perl GPL-1.0
 Requires: perl-Sub-Install-license = %{version}-%{release}
+Requires: perl-Sub-Install-perl = %{version}-%{release}
 BuildRequires : buildreq-cpan
 
 %description
@@ -23,6 +24,7 @@ install subroutines into packages easily
 Summary: dev components for the perl-Sub-Install package.
 Group: Development
 Provides: perl-Sub-Install-devel = %{version}-%{release}
+Requires: perl-Sub-Install = %{version}-%{release}
 
 %description dev
 dev components for the perl-Sub-Install package.
@@ -36,18 +38,28 @@ Group: Default
 license components for the perl-Sub-Install package.
 
 
+%package perl
+Summary: perl components for the perl-Sub-Install package.
+Group: Default
+Requires: perl-Sub-Install = %{version}-%{release}
+
+%description perl
+perl components for the perl-Sub-Install package.
+
+
 %prep
 %setup -q -n Sub-Install-0.928
-cd ..
-%setup -q -T -D -n Sub-Install-0.928 -b 1
+cd %{_builddir}
+tar xf %{_sourcedir}/libio-handle-util-perl_0.01-2.debian.tar.xz
+cd %{_builddir}/Sub-Install-0.928
 mkdir -p deblicense/
-mv %{_topdir}/BUILD/debian/* %{_topdir}/BUILD/Sub-Install-0.928/deblicense/
+cp -r %{_builddir}/debian/* %{_builddir}/Sub-Install-0.928/deblicense/
 
 %build
 export http_proxy=http://127.0.0.1:9/
 export https_proxy=http://127.0.0.1:9/
 export no_proxy=localhost,127.0.0.1,0.0.0.0
-export LANG=C
+export LANG=C.UTF-8
 if test -f Makefile.PL; then
 %{__perl} Makefile.PL
 make  %{?_smp_mflags}
@@ -57,7 +69,7 @@ else
 fi
 
 %check
-export LANG=C
+export LANG=C.UTF-8
 export http_proxy=http://127.0.0.1:9/
 export https_proxy=http://127.0.0.1:9/
 export no_proxy=localhost,127.0.0.1,0.0.0.0
@@ -66,8 +78,8 @@ make TEST_VERBOSE=1 test
 %install
 rm -rf %{buildroot}
 mkdir -p %{buildroot}/usr/share/package-licenses/perl-Sub-Install
-cp LICENSE %{buildroot}/usr/share/package-licenses/perl-Sub-Install/LICENSE
-cp deblicense/copyright %{buildroot}/usr/share/package-licenses/perl-Sub-Install/deblicense_copyright
+cp %{_builddir}/Sub-Install-0.928/LICENSE %{buildroot}/usr/share/package-licenses/perl-Sub-Install/6ce0ad2774e7f285a5dbd7daad686b86433f27d8
+cp %{_builddir}/Sub-Install-0.928/deblicense/copyright %{buildroot}/usr/share/package-licenses/perl-Sub-Install/c7cbead4fc445ef2748335e1d1a81a21d992aad2
 if test -f Makefile.PL; then
 make pure_install PERL_INSTALL_ROOT=%{buildroot} INSTALLDIRS=vendor
 else
@@ -80,7 +92,6 @@ find %{buildroot} -type f -name '*.bs' -empty -exec rm -f {} ';'
 
 %files
 %defattr(-,root,root,-)
-/usr/lib/perl5/vendor_perl/5.28.2/Sub/Install.pm
 
 %files dev
 %defattr(-,root,root,-)
@@ -88,5 +99,9 @@ find %{buildroot} -type f -name '*.bs' -empty -exec rm -f {} ';'
 
 %files license
 %defattr(0644,root,root,0755)
-/usr/share/package-licenses/perl-Sub-Install/LICENSE
-/usr/share/package-licenses/perl-Sub-Install/deblicense_copyright
+/usr/share/package-licenses/perl-Sub-Install/6ce0ad2774e7f285a5dbd7daad686b86433f27d8
+/usr/share/package-licenses/perl-Sub-Install/c7cbead4fc445ef2748335e1d1a81a21d992aad2
+
+%files perl
+%defattr(-,root,root,-)
+/usr/lib/perl5/vendor_perl/5.30.1/Sub/Install.pm
