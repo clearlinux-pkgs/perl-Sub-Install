@@ -4,7 +4,7 @@
 #
 Name     : perl-Sub-Install
 Version  : 0.928
-Release  : 25
+Release  : 26
 URL      : https://cpan.metacpan.org/authors/id/R/RJ/RJBS/Sub-Install-0.928.tar.gz
 Source0  : https://cpan.metacpan.org/authors/id/R/RJ/RJBS/Sub-Install-0.928.tar.gz
 Source1  : http://http.debian.net/debian/pool/main/libi/libio-handle-util-perl/libio-handle-util-perl_0.01-2.debian.tar.xz
@@ -79,7 +79,7 @@ make TEST_VERBOSE=1 test
 rm -rf %{buildroot}
 mkdir -p %{buildroot}/usr/share/package-licenses/perl-Sub-Install
 cp %{_builddir}/Sub-Install-0.928/LICENSE %{buildroot}/usr/share/package-licenses/perl-Sub-Install/6ce0ad2774e7f285a5dbd7daad686b86433f27d8
-cp %{_builddir}/Sub-Install-0.928/deblicense/copyright %{buildroot}/usr/share/package-licenses/perl-Sub-Install/c7cbead4fc445ef2748335e1d1a81a21d992aad2
+cp %{_builddir}/debian/copyright %{buildroot}/usr/share/package-licenses/perl-Sub-Install/c7cbead4fc445ef2748335e1d1a81a21d992aad2
 if test -f Makefile.PL; then
 make pure_install PERL_INSTALL_ROOT=%{buildroot} INSTALLDIRS=vendor
 else
@@ -104,4 +104,4 @@ find %{buildroot} -type f -name '*.bs' -empty -exec rm -f {} ';'
 
 %files perl
 %defattr(-,root,root,-)
-/usr/lib/perl5/vendor_perl/5.30.1/Sub/Install.pm
+/usr/lib/perl5/vendor_perl/5.30.2/Sub/Install.pm
